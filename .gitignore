@@ -1,0 +1,12 @@
+# Build folder
+bin/
+
+# Linker script
+generated.*.ld
+
+# Python
+**/venv/
+**/__pycache__/
+
+# LSP
+compile_commands.json
