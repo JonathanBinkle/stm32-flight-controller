@@ -68,7 +68,7 @@
 #define ODR_1660Hz 0b1000
 
 /* Full scale selection (DS12814 Table 52 & 178) and sensitivity (Table 2):
- * - acceleromter: 16g
+ * - accelerometer: 16g
  * - gyroscope: 2000dps */
 #define ACC_FSS 0b01
 #define ACC_SENSITIVITY 0.488f
