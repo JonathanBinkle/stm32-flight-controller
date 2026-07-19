@@ -79,7 +79,7 @@ lsp:
 	@bear -- make clean all
 
 flash:
-	@st-flash --reset write $(BUILD_DIR)/$(PROJECT).bin $(FLASH_BASE)
+	@st-flash --connect-under-reset --reset write $(BUILD_DIR)/$(PROJECT).bin $(FLASH_BASE)
 
 debug:
 	@st-util

@@ -3,10 +3,8 @@
  */
 
 #include "usb.h"
-#include "led.h"
 #include "timer.h"
 #include <libopencm3/cm3/nvic.h>
-#include <libopencm3/cm3/scb.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/usb/cdc.h>
@@ -14,6 +12,7 @@
 #include <libopencm3/usb/dwc/otg_fs.h>
 #include <libopencm3/usb/usbd.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 #define USB_RCC RCC_OTGFS
 #define USB_RX_ENDPOINT_ADDR 0x01
