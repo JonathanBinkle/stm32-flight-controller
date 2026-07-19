@@ -11,7 +11,7 @@
 #include "telemetry/telemetry.h"
 #include "telemetry/usb_telemetry.h"
 #include "timer.h"
-#include <libopencm3/stm32/f4/rcc.h>
+#include <libopencm3/stm32/rcc.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -80,12 +80,22 @@ int main(void)
         fc_out =
             *fc_update(&rx_latest, &imu_angles, &imu_latest.si, timer_now_us());
 
-        throttles = *motor_mixing(fc_out.roll_out, fc_out.pitch_out,
-                                  fc_out.yaw_out, &rx_latest);
+        if (rx_driver.rx_time_last_rcvd_packet() > 0 &&
+            timer_now_us() - rx_driver.rx_time_last_rcvd_packet() > 500000) {
+            /* No RX packet received within 500ms. Classify as RX signal loss.
+             * Disarm motors for safety (until RX signal is healthy again). */
+            throttles.front_left = ESC_MIN_THROTTLE;
+            throttles.front_right = ESC_MIN_THROTTLE;
+            throttles.back_left = ESC_MIN_THROTTLE;
+            throttles.back_right = ESC_MIN_THROTTLE;
+        } else {
+            throttles = *motor_mixing(fc_out.roll_out, fc_out.pitch_out,
+                                      fc_out.yaw_out, &rx_latest);
+        }
 
         esc_driver.base->esc_update(&esc_driver, &throttles);
 
-        /*Send telemetry after real work.*/
+        /* Send telemetry data. */
         telemetry_tick();
         uint32_t deadline_us = next_iteration_start_us - /* margin: */ 20;
         telemetry.send(RX_SAMPLE, &rx_latest, sizeof rx_latest, deadline_us);

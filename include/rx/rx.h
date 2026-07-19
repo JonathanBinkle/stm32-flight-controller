@@ -41,6 +41,10 @@ struct rx_driver {
     /* Latest RX data. Blocks until next sample if no sample has been received
      * yet or if `blocking` is set. */
     struct rx_sample *(*rx_recv)(bool blocking);
+
+    /* Absolute time in microseconds of last received RX packet.
+     * Returns 0 if no packet has been received yet. */
+    uint32_t (*rx_time_last_rcvd_packet)(void);
 };
 
 #endif /* FC_RX_H */

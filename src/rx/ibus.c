@@ -1,8 +1,7 @@
 #include "rx/ibus.h"
 #include "rx/rx.h"
+#include "timer.h"
 #include <libopencm3/cm3/nvic.h>
-#include <libopencm3/stm32/f4/rcc.h>
-#include <libopencm3/stm32/f4/usart.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/usart.h>
@@ -27,8 +26,11 @@
 
 static void ibus_setup(void);
 static struct rx_sample *ibus_recv(bool blocking);
+static uint32_t ibus_time_last_rcvd_packet(void);
 const struct rx_driver ibus_driver = {.rx_setup = ibus_setup,
-                                      .rx_recv = ibus_recv};
+                                      .rx_recv = ibus_recv,
+                                      .rx_time_last_rcvd_packet =
+                                          ibus_time_last_rcvd_packet};
 
 /* Processing state of the latest IBUS packet. */
 static struct {
@@ -40,6 +42,7 @@ static struct {
 
 static volatile bool ibus_data_ready = false;
 static volatile bool ibus_rcvd_first_packet = false;
+static volatile uint32_t time_last_rcvd_packet = 0;
 static struct rx_sample ibus_data;
 static bool initialized = false;
 
@@ -96,6 +99,7 @@ static void ibus_update_state(uint8_t ch)
 
                 ibus_data_ready = true;
                 ibus_rcvd_first_packet = true;
+                time_last_rcvd_packet = timer_now_us();
             }
 
             /* Reset state for next packet. */
@@ -162,4 +166,12 @@ static struct rx_sample *ibus_recv(bool blocking)
     ibus_data_ready = false;
 
     return &ibus_data;
+}
+
+static uint32_t ibus_time_last_rcvd_packet(void)
+{
+    if (!ibus_rcvd_first_packet) {
+        return 0;
+    }
+    return time_last_rcvd_packet;
 }
