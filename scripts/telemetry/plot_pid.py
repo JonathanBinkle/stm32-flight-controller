@@ -13,21 +13,14 @@ timestamps, data, lock = start_reader(TelemetryId.PID_PITCH)
 
 app, win = start_app()
 
-# --------------------------------------------------
 # Desired vs Actual
-# --------------------------------------------------
-
 response_plot = make_plot(win, "PID Response")
 response_plot.setLabel("left", "Angle", units="deg")
 response_plot.setLabel("bottom", "Time", units="s")
 response_curves = make_curves(response_plot, ("desired", "actual"))
 
-# --------------------------------------------------
 # PID terms
-# --------------------------------------------------
-
 win.nextRow()
-
 terms_plot = make_plot(win, "PID Terms")
 terms_plot.setLabel("left", "Output")
 terms_plot.setLabel("bottom", "Time", units="s")
@@ -43,7 +36,6 @@ def update_plot():
 
         desired = list(data["desired"])
         actual = list(data["actual"])
-
         pterm = list(data["pterm"])
         iterm = list(data["iterm"])
         dterm = list(data["dterm"])

@@ -103,9 +103,9 @@ PACKET_DEFS = {
         struct.Struct("<" + "f" * 3),
         ("pitch_pid", "roll_pid", "yaw_pid", "flight_mode"),
     ),
-    TelemetryId.PID_PITCH: PacketDef(struct.Struct("<" + "I" + "f" * 8), PID_FIELDS),
-    TelemetryId.PID_ROLL: PacketDef(struct.Struct("<" + "I" + "f" * 8), PID_FIELDS),
-    TelemetryId.PID_YAW: PacketDef(struct.Struct("<" + "I" + "f" * 8), PID_FIELDS),
+    TelemetryId.PID_PITCH: PacketDef(struct.Struct("<" + "I" + "f" * 10), PID_FIELDS),
+    TelemetryId.PID_ROLL: PacketDef(struct.Struct("<" + "I" + "f" * 10), PID_FIELDS),
+    TelemetryId.PID_YAW: PacketDef(struct.Struct("<" + "I" + "f" * 10), PID_FIELDS),
     TelemetryId.IMU_BIAS: PacketDef(
         struct.Struct("<" + "f" * 6), ("gx", "gy", "gz", "ax", "ay", "az")
     ),
