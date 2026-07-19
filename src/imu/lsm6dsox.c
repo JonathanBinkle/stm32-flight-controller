@@ -6,9 +6,6 @@
 #include <libopencm3/cm3/cortex.h>
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/exti.h>
-#include <libopencm3/stm32/f4/dma.h>
-#include <libopencm3/stm32/f4/gpio.h>
-#include <libopencm3/stm32/f4/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/i2c.h>
 #include <libopencm3/stm32/rcc.h>
@@ -244,12 +241,10 @@ static void fetch_raw_data(void)
      *      - move forward => positive ax
      * - gyroscope:
      *      - pitch forward => positive gy
-     *      - roll right => positve gx
+     *      - roll right => positive gx
      *      - yaw clockwise => positive gz */
-    latest_raw.ax = -latest_raw.ax;
-    latest_raw.gx = -latest_raw.gx;
-    latest_raw.gy = -latest_raw.gy;
     latest_raw.gz = -latest_raw.gz;
+    latest_raw.ay = -latest_raw.ay;
 
     gyro_drdy = false;
     acc_drdy = false;

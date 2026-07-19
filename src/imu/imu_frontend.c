@@ -40,12 +40,12 @@ void imu_calibrate(const struct imu_driver *imu, bool use_precomputed_bias)
 {
 
     if (use_precomputed_bias) {
-        bias.gx = -0.01851444f;
-        bias.gy = -0.00216312f;
-        bias.gz = -0.01575859f;
-        bias.ax = 0.11948995f;
-        bias.ay = -0.41510999f;
-        bias.az = 0.21424796f;
+        bias.gx = 0.0012803464;
+        bias.gy = -0.0045885462;
+        bias.gz = -0.0086432267;
+        bias.ax = 0.2003362477;
+        bias.ay = 0.0798646286;
+        bias.az = 0.1923642159;
     } else {
         struct imu_si sample;
         memset(&bias, 0, sizeof bias);
