@@ -17,9 +17,9 @@ enum esc_position {
 
 /* Map ESC position to timer's output channel. Depends on hardware wiring. */
 static const enum tim_oc_id esc_map[4] = {
-    [FRONT_LEFT] = TIM_OC4,
+    [FRONT_LEFT] = TIM_OC3,
     [FRONT_RIGHT] = TIM_OC2,
-    [BACK_LEFT] = TIM_OC3,
+    [BACK_LEFT] = TIM_OC4,
     [BACK_RIGHT] = TIM_OC1,
 };
 

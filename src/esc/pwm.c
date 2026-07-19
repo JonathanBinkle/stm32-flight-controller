@@ -1,5 +1,4 @@
 #include "esc/pwm.h"
-#include "esc/esc.h"
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/dma.h>
 #include <libopencm3/stm32/gpio.h>
