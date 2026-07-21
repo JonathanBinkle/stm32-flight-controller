@@ -5,7 +5,7 @@ A simple flight controller for a custom-built quadcopter, written in C using [li
 While the project is considered mostly "done" for now, I may continue to work on it in the future.
 
 This README provides an overview of the project, while a more detailed writeup of individual project stages can be found in the `docs/` (**writeups currently in progress**):
-1. Quadcopter Basics and Hardware
+1. [Quadcopter Basics and Hardware](docs/Stage_00-Drone_Basics_and_Hardware.md)
 2. Blinky
 3. USB Telemetry
 4. Radio Receiver
