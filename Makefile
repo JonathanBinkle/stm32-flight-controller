@@ -1,5 +1,5 @@
 # >>> TODO: adjust if necessary
-PROJECT		= pid
+PROJECT		= blinky
 DEVICE		= stm32f411ceu6
 FLASH_BASE	= 0x08000000
 SRC_DIR		= src
