@@ -27,8 +27,7 @@ void timer_setup(void)
     timer_set_prescaler(TIMER, (rcc_get_timer_clk_freq(TIMER) / 1000000u) - 1);
     timer_set_period(TIMER, 0xffffffff);
     timer_set_counter(TIMER, 0);
-    TIM_EGR(TIMER) = TIM_EGR_UG; /*
-Force UEV (apply settings immediately). */
+    TIM_EGR(TIMER) = TIM_EGR_UG; /* Force UEV (apply settings immediately). */
 
     /* Fire IRQ when we hit OC1; OC1 will be set to deadline. */
     timer_disable_oc_output(TIMER, TIM_OC1);
@@ -75,8 +74,7 @@ void timer_wait_until_us(uint32_t deadline_us)
         __asm__ volatile("wfi");
         timer_disable_irq(TIMER, TIM_DIER_CC1IE);
 
-        /* Loop back around and handle `remaining` again: we may have waken
-        up
+        /* Loop back around and handle `remaining` again: we may have waken up
          * for an unrelated IRQ and have to sleep more. */
     }
 }
