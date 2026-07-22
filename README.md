@@ -6,7 +6,7 @@ While the project is considered mostly "done" for now, I may continue to work on
 
 This README provides an overview of the project, while a more detailed writeup of individual project stages can be found in the `docs/` (**writeups currently in progress**):
 1. [Quadcopter Basics and Hardware](docs/Stage_00-Drone_Basics_and_Hardware.md)
-2. Blinky
+2. [Blinky](docs/Stage_01-Blinky.md)
 3. USB Telemetry
 4. Radio Receiver
 5. Motor Control
@@ -113,7 +113,6 @@ The system clock runs at 84 MHz, driven by a 25 MHz crystal on the BlackPill. Th
 #### System timer
 
 Code: `src/timer.c`, `include/timer.h`.
-- Deprecated: `src/timer_busywait.c`
 
 A 32-bit timer peripheral is used to implement a system-wide microsecond-precision timer (i.e., 1 tick per us). It overflows roughly every 71 minutes - way above the expected flight duration.
 
